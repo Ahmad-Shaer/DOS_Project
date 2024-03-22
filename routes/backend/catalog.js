@@ -4,22 +4,22 @@ const fetch = require('node-fetch');
 const fs = require('fs').promises; 
 const catalogfile = require('./Data/books.txt');
 
-router.get("/search/:itemName", async (req, res) => {
+router.get("/search/:topic", async (req, res) => {
     try {
-        let itemName = req.params.itemName; 
+        let topic = req.params.topic; 
         const items = catalogfile.items;
-        let foundItem = null;
+        let foundItems = [];
+
         for (const item of Object.values(items)) {
-            if (item.Name.toLowerCase() === itemName.toLowerCase()) {
-                foundItem = item;
-                break;
+            if (item.topic.toLowerCase().includes(topic.toLowerCase())) {
+                foundItems.push(item);
             }
         }
 
-        if (foundItem) {
-            res.status(200).json(foundItem);
+        if (foundItems.length > 0) {
+            res.status(200).json(foundItems);
         } else {
-            res.status(404).send("Item not found");
+            res.status(404).send("No items found matching the search criteria");
         }
     } catch (error) {
         console.error(error);
@@ -45,29 +45,29 @@ router.get("/info/:id", async (req, res) => {
 });
 router.patch("/info/:id", async (req, res) => {
     try {
-        let id = req.params.id ;
-        let cost = req.body.params.cost ;
-        let stock = req.body.params.stock;
+        let id = req.params.id;
+        let cost = req.body.cost;
+        let stock = req.body.stock;
         const items = catalogfile.items;
         const foundItem = items[id];
 
         if (foundItem) {
-            if(stock == 1)foundItem.stock++;
-            else if(stock == 2)foundItem.stock--;
-            if(cost >0 )foundItem.cost = cost;
+            if (stock == 1) foundItem.stock++;
+            else if (stock == 2) foundItem.stock--;
+            if (cost > 0) foundItem.cost = cost;
             await fs.writeFile('./Data/books.txt', JSON.stringify(catalogfile, null, 2));
-            
+
             res.status(200).json(foundItem);
-        
         } else {
-            res.status(404).send("not found");
+            res.status(404).send("Item not found");
         }
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
     }
 });
+
 
 
 

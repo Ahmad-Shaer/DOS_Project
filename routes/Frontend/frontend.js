@@ -6,11 +6,11 @@ const {order}= require('../backend/order.js')
 router.use('/catalog', catalog);
 router.use('/order', order);
 
-router.get("/search/:itemName", async (req, res) => {
+router.get("/search/:topic", async (req, res) => {
     try {
-        let itemName = req.params.itemName ;
+        let topic = req.params.topic ;
 
-        const bookSearch = await fetch('http://localhost:8000/catalog/search/'+itemName, {
+        const bookSearch = await fetch('http://localhost:8000/catalog/search/'+topic, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
