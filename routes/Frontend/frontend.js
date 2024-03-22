@@ -18,10 +18,10 @@ router.get("/search/:itemName", async (req, res) => {
                 // body: JSON.stringify({'itemName': itemName})
             });
 
-        if(bookSearch){
+        if(bookSearch.ok){
             res.status(200).json(bookSearch);
         }else{
-            res.status(200).json("book your looking for is not available");
+            res.status(404).json("book your looking for is not available");
         }
         
     } catch (error) {
@@ -41,13 +41,12 @@ router.get("/info/:id", async (req, res) => {
                 // body: JSON.stringify({'itemName': itemName})
             });
 
-        if(bookSearch){
+        if(bookSearch.ok){
             res.status(200).json(bookSearch);
         }else{
-            res.status(200).json("book your looking for is not available");
+            res.status(404).json("book your looking for is not available");
         }
        
-        res.status(200).json();
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
