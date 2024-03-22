@@ -40,7 +40,7 @@ router.post("/purchase/:id", async (req, res) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                // body: JSON.stringify({'itemName': itemName})
+                 body: JSON.stringify({'stock': 2})
             });
             if (bookUpdate.ok) {
                 const bookData = await bookUpdate.json();

@@ -46,11 +46,15 @@ router.get("/info/:id", async (req, res) => {
 router.patch("/info/:id", async (req, res) => {
     try {
         let id = req.params.id ;
+        let cost = req.body.params.cost ;
+        let stock = req.body.params.stock;
         const items = catalogfile.items;
         const foundItem = items[id];
 
         if (foundItem) {
-            foundItem.stock--;
+            if(stock == 1)foundItem.stock++;
+            else if(stock == 2)foundItem.stock--;
+            if(cost >0 )foundItem.cost = cost;
             await fs.writeFile('./Data/books.txt', JSON.stringify(catalogfile, null, 2));
             
             res.status(200).json(foundItem);
