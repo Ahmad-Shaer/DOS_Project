@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/search/:itemName", async (req, res) => {
     try {
-        let itemName = req.params.itemName ;
+        let itemName = req.params.itemName; 
 
         
         res.status(200).json();
@@ -26,15 +26,6 @@ router.get("/info/:id", async (req, res) => {
     }
 });
 
-router.post("/purchase/:id", async (req, res) => {
-    try {
-        let id = req.params.id;
-        
-        res.status(200).send("Data updated");
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
-    }
-});
+
 
 module.exports = router;

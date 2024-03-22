@@ -1,10 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const {catalog} = require('../backend/catalog.js')
-
-router.get("/search/:itemName", async (req, res) => {
+router.use('/catalog', catalog);
+const orderfile = require('./Data/orders.txt');
+router.get("/info/:id", async (req, res) => {
     try {
-        let itemName = req.params.itemName ;
+        let id = req.params.id ;
+        
+        // read the file and search for the item if found decrease the number of stocks in file and return true otherwise return false  
+        res.status(200).json();
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+router.patch("/info/:id", async (req, res) => {
+    try {
+        let id = req.params.id ;
 
         // read the file and search for the item if found decrease the number of stocks in file and return true otherwise return false  
         res.status(200).json();

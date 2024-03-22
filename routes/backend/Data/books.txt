@@ -1,23 +1,29 @@
  {
  "items": {
-	
-	"How to get a good grade in DOS in 40 minutes a day" : {
+	{
+		"id" : 0,
+		"Name": "How to get a good grade in DOS in 40 minutes a day" ,
 		"cost" : 20,
 		"stock" : 5, 
 		"topic" : "distributed systems"
 	},
-	"RPC for Noobs": {
+	{
+		"id" : 1,
+		"Name":"RPC for Noobs": {
 		"cost" : 40,
 		"stock" : 2, 
 		"topic" : "distributed systems"
 	},
-	"Xen and the Art of Surviving Undergraduate School" : {
+	{
+		"id" : 2,
+		"Name":"Xen and the Art of Surviving Undergraduate School" : {
 		"cost" : 45,
 		"stock" : 8, 
 		"topic" : "undergraduate school"
 	},
-	
-	"Cooking for the Impatient Undergraduate Student" : {
+	{
+		"id" : 3,
+		"Name":"Cooking for the Impatient Undergraduate Student" : {
 		"cost" : 32,
 		"stock" : 9, 
 		"topic" : "undergraduate school"
