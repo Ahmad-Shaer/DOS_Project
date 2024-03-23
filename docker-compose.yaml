@@ -31,7 +31,7 @@ services:
     build: ./order
     container_name: order_c
     ports:
-      - '2000:2000'
+      - '2020:2000'
     hostname: order
     networks:
       - network1
