@@ -90,6 +90,51 @@ app.patch("/info/:id", async (req, res) => {
     }
 });
 
+app.post("/add/:id", async (req,res) => {
+    try {
+        const { name, cost, stock, topic } = req.body;
+
+        if (!name || !cost || !stock || !topic) {
+            res.status(400).send("Required fields are missing in the request body");
+            return;
+        }
+
+        const db = await connectDatabase();
+
+        const result = await db.run(
+            "INSERT INTO books (Name, cost, stock, topic) VALUES (?, ?, ?, ?)",
+            [name, cost, stock, topic]
+        );
+
+        const insertedBook = await db.get("SELECT * FROM books WHERE id = ?", result.lastID);
+
+        res.status(201).json(insertedBook);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+app.delete("/delete/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const db = await connectDatabase();
+
+        const existingBook = await db.get("SELECT * FROM books WHERE id = ?", id);
+        if (!existingBook) {
+            res.status(404).send("Book not found");
+            return;
+        }
+
+        await db.run("DELETE FROM books WHERE id = ?", id);
+
+        res.status(200).send("Book deleted successfully");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 
 // Liseining for requests
