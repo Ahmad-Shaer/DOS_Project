@@ -1,9 +1,0 @@
-{
-	"orders": [
-		{
-			"orderNumber": "1",
-			"bookName": "How to get a good grade in DOS in 40 minutes a day",
-			"price": 20
-		}
-	]
-}
