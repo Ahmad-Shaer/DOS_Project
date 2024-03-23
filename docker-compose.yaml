@@ -1,0 +1,40 @@
+networks:
+  network1:
+    driver: bridge
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend_c
+    ports:
+      - '8000:8000'
+    hostname: frontend
+    networks:
+      - network1
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    
+  catalog:
+    build: ./catalog
+    container_name: catalog_c
+    ports:
+      - '4000:4000'
+    hostname: catalog
+    networks:
+      - network1
+    volumes:
+      - ./catalog:/app
+      - /app/node_modules
+    
+  order:
+    build: ./order
+    container_name: order_c
+    ports:
+      - '2000:2000'
+    hostname: order
+    networks:
+      - network1
+    volumes:
+      - ./order:/app
+      - /app/node_modules
