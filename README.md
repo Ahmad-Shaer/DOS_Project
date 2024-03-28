@@ -1,1 +1,1 @@
-The documentation is in the doc file
+The documentation is in the DOC file
